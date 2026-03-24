@@ -1,5 +1,6 @@
 Polaroid Auto-Cropper & OCR Metadata Tagger
 This project automates the extraction of multiple scanned photos (specifically Polaroids) from a single flatbed scanner image. It automatically detects individual photos, crops them while preserving their classic white borders, and isolates a handwritten label strip. It then uses Optical Character Recognition (OCR) to read the label strip and automatically injects that text into the EXIF metadata (Title and Description) of the newly extracted photos.
+https://gemini.google.com/share/c0b59c4b388d
 
 Prerequisites
 This workflow is designed for Ubuntu 22.04 LTS. It utilizes standard repository packages to handle image processing, OCR, and metadata manipulation.
