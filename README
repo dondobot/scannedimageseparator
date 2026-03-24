@@ -1,0 +1,46 @@
+Polaroid Auto-Cropper & OCR Metadata Tagger
+This project automates the extraction of multiple scanned photos (specifically Polaroids) from a single flatbed scanner image. It automatically detects individual photos, crops them while preserving their classic white borders, and isolates a handwritten label strip. It then uses Optical Character Recognition (OCR) to read the label strip and automatically injects that text into the EXIF metadata (Title and Description) of the newly extracted photos.
+
+Prerequisites
+This workflow is designed for Ubuntu 22.04 LTS. It utilizes standard repository packages to handle image processing, OCR, and metadata manipulation.
+
+Install the required dependencies via your terminal:
+
+Bash
+
+sudo add-apt-repository universe
+sudo apt update
+sudo apt install python3-opencv tesseract-ocr python3-pytesseract libimage-exiftool-perl
+Hardware / Scanning Preparation
+CRITICAL: OpenCV relies on high contrast to detect the edges of your photos. Because Polaroids have white borders, scanning them against a white scanner lid will cause the edge detection to fail or crop the border away.
+
+You must scan using a dark background. Place your photos face down on the scanner glass, and place a piece of black construction paper or a dark folder over them before closing the lid.
+
+Place your small, handwritten title strip near the bottom of the scanner glass.
+
+
+2. The Batch Script (batch_process.sh)
+This wrapper script iterates over all .jpg files in the directory, checks for required dependencies, executes the Python script, and neatly organizes the output. Save this as batch_process.sh and make it executable (chmod +x batch_process.sh).
+1. The Python Script (autocrop_ocr.py)
+This script handles the heavy lifting: edge detection, applying a protective padding to preserve the Polaroid borders, OCR, and EXIF tagging. Save this as autocrop_ocr.py in your working directory.
+
+
+
+## Usage
+
+You no longer need to keep the scripts in the same folder as your photos. You can save both `autocrop_ocr.py` and `batch_process.sh` anywhere on your machine (e.g., `~/bin/` or `~/scripts/`).
+
+1. Make the bash script executable:
+   ```bash
+   chmod +x batch_process.sh
+
+
+Run the script, passing the folder containing your raw scans as an argument:
+
+Bash
+
+./batch_process.sh /path/to/your/scans/
+(If you run the script without an argument, it will default to processing the directory your terminal is currently in).
+
+The script will automatically create an extracted_photos subfolder inside your target directory and neatly organize all the processed files there.
+
