@@ -25,6 +25,12 @@ This wrapper script iterates over all .jpg files in the directory, checks for re
 This script handles the heavy lifting: edge detection, applying a protective padding to preserve the Polaroid borders, OCR, and EXIF tagging. Save this as autocrop_ocr.py in your working directory.
 
 
+# Create the environment in a folder called 'scan_env'
+python3 -m venv --system-site-packages scan_env
+
+# Activate the environment
+source scan_env/bin/activate
+
 
 ## Usage
 
